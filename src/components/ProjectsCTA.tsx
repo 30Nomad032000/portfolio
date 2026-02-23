@@ -51,36 +51,65 @@ export default function ProjectsCTA() {
           Supabase, Stripe, and PostgreSQL.
         </p>
 
-        <div className="repo-card">
-          <div className="repo-card-header">
-            <span className="repo-name">ebinjoseph/portfolio</span>
-            <span className="repo-visibility">Public</span>
-          </div>
-          <div className="repo-meta">
-            <span className="repo-lang">
-              <span className="repo-lang-dot" />
-              TypeScript
-            </span>
-            <span className="repo-stat">&#9733; 2.1K</span>
-            <span className="repo-stat">&#127860; 340</span>
-          </div>
-          <div className="repo-commits">
-            <span className="repo-commit-icon">&#8250;</span>
-            <Typewriter
-              speed="fast"
-              variance="natural"
-              replace="type"
-              backspace="all"
-              onComplete={() => {
-                setTimeout(() => {
-                  setCommitIdx((i) => (i + 1) % commits.length);
-                }, 3000);
-              }}
-              textClassName="repo-commit-text"
-              cursorStyle={{ backgroundColor: "var(--accent)" }}
-            >
-              {commits[commitIdx]}
-            </Typewriter>
+        <div className="project-cards">
+          <a
+            href="https://chess-arena-flax.vercel.app/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="repo-card repo-card--link"
+          >
+            <div className="repo-card-header">
+              <span className="repo-name">Gambit</span>
+              <span className="repo-visibility">Live</span>
+            </div>
+            <p className="repo-desc">
+              AI chess betting platform — polyglot microservices with ranked ELO ladder,
+              real-time WebSocket streaming, dynamic odds engine, and MCP server for
+              external LLMs to join as players.
+            </p>
+            <div className="repo-meta">
+              <span className="repo-lang">
+                <span className="repo-lang-dot repo-lang-dot--ts" />
+                TypeScript
+              </span>
+              <span className="repo-lang">
+                <span className="repo-lang-dot repo-lang-dot--py" />
+                Python
+              </span>
+              <span className="repo-stat">React &middot; Express &middot; FastAPI &middot; Redis</span>
+            </div>
+          </a>
+
+          <div className="repo-card">
+            <div className="repo-card-header">
+              <span className="repo-name">ebinjoseph/portfolio</span>
+              <span className="repo-visibility">Public</span>
+            </div>
+            <div className="repo-meta">
+              <span className="repo-lang">
+                <span className="repo-lang-dot" />
+                TypeScript
+              </span>
+              <span className="repo-stat">Next.js &middot; GSAP &middot; Motion</span>
+            </div>
+            <div className="repo-commits">
+              <span className="repo-commit-icon">&#8250;</span>
+              <Typewriter
+                speed="fast"
+                variance="natural"
+                replace="type"
+                backspace="all"
+                onComplete={() => {
+                  setTimeout(() => {
+                    setCommitIdx((i) => (i + 1) % commits.length);
+                  }, 3000);
+                }}
+                textClassName="repo-commit-text"
+                cursorStyle={{ backgroundColor: "var(--accent)" }}
+              >
+                {commits[commitIdx]}
+              </Typewriter>
+            </div>
           </div>
         </div>
 

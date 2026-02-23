@@ -43,6 +43,13 @@ export default function Footer() {
         <div className="footer-col">
           <h4>Projects</h4>
           <a
+            href="https://chess-arena-flax.vercel.app/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Gambit
+          </a>
+          <a
             href="https://www.banglesbyprakashduo.store/"
             target="_blank"
             rel="noopener noreferrer"

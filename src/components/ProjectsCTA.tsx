@@ -1,125 +1,166 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
+import Image from "next/image";
+import { ExternalLink, Github } from "lucide-react";
 import SectionMarker from "./SectionMarker";
-import { Typewriter } from "@/lib/motion-plus/typewriter";
 
-gsap.registerPlugin(ScrollTrigger);
-
-const commits = [
-  "feat: add real-time WebSocket notifications",
-  "fix: resolve race condition in checkout flow",
-  "perf: optimize query plan — 3x faster reads",
-  "feat: multi-tenant auth with row-level security",
-  "chore: migrate to Next.js 16 App Router",
+const projects = [
+  {
+    name: "Gambit",
+    subtitle: "AI Chess Betting Platform",
+    description:
+      "Polyglot microservices — AI agents compete on a ranked ELO ladder with real-time streaming via WebSocket, dynamic odds engine with auto-settlement, and MCP server enabling external LLMs to join as players.",
+    stack: ["TypeScript", "Python", "React", "Express", "FastAPI", "PostgreSQL", "Redis", "WebSocket"],
+    image: "/projects/gambit.png",
+    liveUrl: "https://chess-arena-flax.vercel.app/",
+    githubUrl: "https://github.com/30Nomad032000/chess-arena",
+    status: "live" as const,
+  },
+  {
+    name: "Prakash Duo",
+    subtitle: "E-Commerce Platform",
+    description:
+      "Complete e-commerce system with Cashfree payment gateway, admin dashboard with inventory management, real-time Supabase subscriptions, and automated Zoho SMTP notifications.",
+    stack: ["Next.js", "TypeScript", "Supabase", "Cashfree", "Tailwind CSS"],
+    image: "/projects/prakashduo.png",
+    liveUrl: "https://www.banglesbyprakashduo.store/",
+    status: "live" as const,
+  },
+  {
+    name: "Trident Rentals",
+    subtitle: "Property Rental Platform",
+    description:
+      "Full-stack property rental application with listing management, advanced search and filtering, booking workflows, and role-based access.",
+    stack: ["Next.js", "TypeScript", "Supabase", "Tailwind CSS"],
+    image: "/projects/tridentrent.png",
+    liveUrl: "https://tridentrent.com",
+    status: "live" as const,
+  },
+  {
+    name: "Logentic",
+    subtitle: "Multilingual Voice Assistant · Edge AI",
+    description:
+      "Hyper-localized voice assistant supporting 21+ Indian languages. LangGraph multi-step agent workflows, OpenAI Whisper speech recognition, optimized for Raspberry Pi 5 edge inference.",
+    stack: ["Python", "FastAPI", "React", "LangGraph", "Whisper ASR", "RPi 5"],
+    image: "/projects/logentic.png",
+    githubUrl: "https://github.com/30Nomad032000/logentic",
+    status: "development" as const,
+  },
 ];
 
 export default function ProjectsCTA() {
-  const sectionRef = useRef<HTMLElement>(null);
-  const [commitIdx, setCommitIdx] = useState(0);
-
-  useEffect(() => {
-    const ctx = gsap.context(() => {
-      gsap.fromTo(
-        ".projects-inner",
-        { opacity: 0, y: 50 },
-        {
-          opacity: 1,
-          y: 0,
-          duration: 1,
-          ease: "power3.out",
-          scrollTrigger: { trigger: ".projects-section", start: "top 75%" },
-        }
-      );
-    }, sectionRef);
-
-    return () => ctx.revert();
-  }, []);
-
   return (
-    <section className="projects-section" id="projects" ref={sectionRef}>
-      <div className="projects-inner">
+    <section className="projects-section" id="projects">
+      <div className="projects-header-block">
         <SectionMarker current={5} total={7} category="Work" sublabel="Projects" />
         <h2>
           Explore the <span className="accent">Projects.</span>
         </h2>
-        <p>
-          From multi-tenant SaaS platforms and e-commerce systems to property
-          rental apps — built with React, Next.js, Django, Express, FastAPI,
-          Supabase, Stripe, and PostgreSQL.
+        <p className="projects-intro">
+          From AI chess platforms and multi-tenant SaaS to edge computing —
+          built with React, Next.js, Django, Express, FastAPI, and PostgreSQL.
         </p>
+      </div>
 
-        <div className="project-cards">
-          <a
-            href="https://chess-arena-flax.vercel.app/"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="repo-card repo-card--link"
-          >
-            <div className="repo-card-header">
-              <span className="repo-name">Gambit</span>
-              <span className="repo-visibility">Live</span>
-            </div>
-            <p className="repo-desc">
-              AI chess betting platform — polyglot microservices with ranked ELO ladder,
-              real-time WebSocket streaming, dynamic odds engine, and MCP server for
-              external LLMs to join as players.
-            </p>
-            <div className="repo-meta">
-              <span className="repo-lang">
-                <span className="repo-lang-dot repo-lang-dot--ts" />
-                TypeScript
-              </span>
-              <span className="repo-lang">
-                <span className="repo-lang-dot repo-lang-dot--py" />
-                Python
-              </span>
-              <span className="repo-stat">React &middot; Express &middot; FastAPI &middot; Redis</span>
-            </div>
-          </a>
+      <div className="projects-grid">
+        {projects.map((project) => {
+          const primaryUrl = project.liveUrl || project.githubUrl || "#";
+          const hostname = project.liveUrl
+            ? new URL(project.liveUrl).hostname.replace("www.", "")
+            : project.githubUrl
+            ? new URL(project.githubUrl).hostname + new URL(project.githubUrl).pathname
+            : "";
 
-          <div className="repo-card">
-            <div className="repo-card-header">
-              <span className="repo-name">ebinjoseph/portfolio</span>
-              <span className="repo-visibility">Public</span>
-            </div>
-            <div className="repo-meta">
-              <span className="repo-lang">
-                <span className="repo-lang-dot" />
-                TypeScript
-              </span>
-              <span className="repo-stat">Next.js &middot; GSAP &middot; Motion</span>
-            </div>
-            <div className="repo-commits">
-              <span className="repo-commit-icon">&#8250;</span>
-              <Typewriter
-                speed="fast"
-                variance="natural"
-                replace="type"
-                backspace="all"
-                onComplete={() => {
-                  setTimeout(() => {
-                    setCommitIdx((i) => (i + 1) % commits.length);
-                  }, 3000);
-                }}
-                textClassName="repo-commit-text"
-                cursorStyle={{ backgroundColor: "var(--accent)" }}
+          return (
+            <article key={project.name} className="project-card">
+              {/* Browser frame */}
+              <a
+                href={primaryUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="project-browser"
               >
-                {commits[commitIdx]}
-              </Typewriter>
-            </div>
-          </div>
-        </div>
+                <div className="project-browser-bar">
+                  <div className="browser-dots">
+                    <span />
+                    <span />
+                    <span />
+                  </div>
+                  <div className="browser-url">{hostname}</div>
+                  <div className="browser-status">
+                    <span
+                      className={`proj-status-dot proj-status-dot--${project.status === "live" ? "green" : "yellow"}`}
+                    />
+                    <span className="proj-status-text">
+                      {project.status === "live" ? "LIVE" : "DEV"}
+                    </span>
+                  </div>
+                </div>
+                <div className="project-preview">
+                  <Image
+                    src={project.image}
+                    alt={`${project.name} — ${project.subtitle}`}
+                    width={1280}
+                    height={800}
+                    className="project-preview-img"
+                    unoptimized
+                  />
+                </div>
+              </a>
 
+              {/* Project info */}
+              <div className="project-info">
+                <div className="project-name-row">
+                  <h3 className="project-title">{project.name}</h3>
+                  <span className="project-divider">/</span>
+                  <span className="project-subtitle">{project.subtitle}</span>
+                </div>
+                <p className="project-description">{project.description}</p>
+                <div className="project-stack">
+                  {project.stack.map((tech) => (
+                    <span key={tech} className="stack-pill">
+                      {tech}
+                    </span>
+                  ))}
+                </div>
+                <div className="project-links">
+                  {project.liveUrl && (
+                    <a
+                      href={project.liveUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="project-link project-link--primary"
+                    >
+                      <ExternalLink size={13} strokeWidth={1.8} />
+                      Visit Site
+                    </a>
+                  )}
+                  {project.githubUrl && (
+                    <a
+                      href={project.githubUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="project-link"
+                    >
+                      <Github size={13} strokeWidth={1.8} />
+                      Source
+                    </a>
+                  )}
+                </div>
+              </div>
+            </article>
+          );
+        })}
+      </div>
+
+      <div className="projects-footer-cta">
         <a
           href="https://github.com/30Nomad032000"
           target="_blank"
           rel="noopener noreferrer"
           className="projects-cta-btn"
         >
-          View on GitHub <span className="arrow">&rarr;</span>
+          View all on GitHub <span className="arrow">&rarr;</span>
         </a>
       </div>
     </section>

@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState, memo } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import SectionMarker from "./SectionMarker";
 import StatusPill from "./StatusPill";
@@ -206,6 +206,25 @@ const orbitPositions = [
   { x: 90, y: -68 },  // top-right
 ];
 
+/* Precompute particle layout — avoids Math.random() in render path */
+const seededRandom = (seed: number) => {
+  const x = Math.sin(seed) * 10000;
+  return x - Math.floor(x);
+};
+const particleData = Array.from({ length: 12 }, (_, i) => {
+  const isInner = i < 7;
+  const spread = isInner ? 18 : 36;
+  const r1 = seededRandom(i * 127.1 + 311.7);
+  const r2 = seededRandom(i * 269.5 + 183.3);
+  const r3 = seededRandom(i * 419.2 + 371.9);
+  return {
+    left: `${50 + (r1 - 0.5) * spread}%`,
+    top: `${50 + (r2 - 0.5) * spread}%`,
+    delay: `${i * 0.18}s`,
+    duration: `${2 + r3 * 2}s`,
+  };
+});
+
 function DevOpsCard() {
   const [msgIdx, setMsgIdx] = useState(0);
   const [activeSat, setActiveSat] = useState(0);
@@ -244,28 +263,20 @@ function DevOpsCard() {
           <div className="dg-line dg-line--v dg-line--v3" />
         </div>
 
-        {/* Scatter particles */}
+        {/* Scatter particles — positions precomputed at module level */}
         <div className="dg-particles" aria-hidden="true">
-          {Array.from({ length: 20 }).map((_, i) => {
-            // Inner ring (first 12): tight cluster around center
-            // Outer ring (last 8): wider spread
-            const isInner = i < 12;
-            const spread = isInner ? 18 : 36;
-            const left = 50 + (Math.random() - 0.5) * spread;
-            const top = 50 + (Math.random() - 0.5) * spread;
-            return (
-              <span
-                key={i}
-                className="dg-particle"
-                style={{
-                  left: `${left}%`,
-                  top: `${top}%`,
-                  animationDelay: `${i * 0.12}s`,
-                  animationDuration: `${1.8 + Math.random() * 2.2}s`,
-                }}
-              />
-            );
-          })}
+          {particleData.map((p, i) => (
+            <span
+              key={i}
+              className="dg-particle"
+              style={{
+                left: p.left,
+                top: p.top,
+                animationDelay: p.delay,
+                animationDuration: p.duration,
+              }}
+            />
+          ))}
         </div>
 
         {/* Satellite icons in grid cells */}
@@ -321,13 +332,15 @@ function DevOpsCard() {
   );
 }
 
-/* ───── Tab Switcher ───── */
-function TabSwitcher({
+/* ───── Tab Switcher with CSS-driven progress ───── */
+const TabSwitcher = memo(function TabSwitcher({
   active,
   onChange,
+  cycleKey,
 }: {
   active: string;
   onChange: (tab: string) => void;
+  cycleKey: number;
 }) {
   return (
     <div className="expertise-tabs">
@@ -338,22 +351,59 @@ function TabSwitcher({
           onClick={() => onChange(tab)}
         >
           {tab}
+          {active === tab && (
+            <span
+              key={cycleKey}
+              className="expertise-tab-progress"
+            />
+          )}
         </button>
       ))}
     </div>
   );
-}
+});
 
 /* ───── Main Expertise Section ───── */
+const CYCLE_MS = 7000;
+
 export default function Expertise() {
   const [activeTab, setActiveTab] = useState<string>("Full-Stack");
+  const [cycleKey, setCycleKey] = useState(0);
+  const timerRef = useRef<ReturnType<typeof setInterval> | null>(null);
+
+  const startCycle = useCallback(() => {
+    if (timerRef.current) clearInterval(timerRef.current);
+    setCycleKey((k) => k + 1);
+    timerRef.current = setInterval(() => {
+      setActiveTab((prev) => {
+        const idx = expertiseTabs.indexOf(prev as (typeof expertiseTabs)[number]);
+        return expertiseTabs[(idx + 1) % expertiseTabs.length];
+      });
+      setCycleKey((k) => k + 1);
+    }, CYCLE_MS);
+  }, []);
+
+  useEffect(() => {
+    startCycle();
+    return () => {
+      if (timerRef.current) clearInterval(timerRef.current);
+    };
+  }, [startCycle]);
+
+  const handleTabChange = useCallback(
+    (tab: string) => {
+      setActiveTab(tab);
+      startCycle();
+    },
+    [startCycle]
+  );
 
   return (
     <section className="features" id="features">
       <div className="features-header">
         <SectionMarker current={2} total={7} category="Core Expertise" sublabel="Developer First" />
         <h2>What I Build</h2>
-        <TabSwitcher active={activeTab} onChange={setActiveTab} />
+        <TabSwitcher active={activeTab} onChange={handleTabChange} cycleKey={cycleKey} />
       </div>
       <div className="features-grid features-grid--stacked">
         <AnimatePresence mode="wait">

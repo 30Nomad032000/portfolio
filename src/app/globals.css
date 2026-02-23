@@ -79,13 +79,17 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
-/* Noise overlay */
-.noise-overlay {
+/* Noise overlay — tiled 200px SVG instead of full-viewport feTurbulence */
+body::after {
+  content: '';
   position: fixed;
   inset: 0;
   pointer-events: none;
   z-index: 9999;
   opacity: 0.045;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-size: 200px 200px;
 }
 
 /* Scrollbar */
@@ -383,6 +387,16 @@ body {
 @keyframes scrollPulse {
   0%, 100% { opacity: 0.3; transform: scaleY(0.6); }
   50% { opacity: 1; transform: scaleY(1); }
+}
+
+/* Hero entrance — CSS-only, replaces GSAP timeline */
+.hero-reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  animation: hero-reveal-up 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+@keyframes hero-reveal-up {
+  to { opacity: 1; transform: translateY(0); }
 }
 
 @media (max-width: 768px) {
@@ -734,6 +748,8 @@ body {
   display: inline-flex;
 }
 .expertise-tab {
+  position: relative;
+  overflow: hidden;
   background: none;
   border: none;
   font-family: var(--mono);
@@ -755,6 +771,19 @@ body {
 .expertise-tab--active:hover {
   background: var(--accent);
   color: #fff;
+}
+.expertise-tab-progress {
+  position: absolute;
+  inset: 0;
+  background: rgba(255, 255, 255, 0.15);
+  transform-origin: left center;
+  pointer-events: none;
+  border-radius: inherit;
+  animation: tab-fill 7s linear forwards;
+}
+@keyframes tab-fill {
+  from { transform: scaleX(0); }
+  to { transform: scaleX(1); }
 }
 
 .features-grid {
@@ -1039,7 +1068,6 @@ body {
   background: var(--accent);
   opacity: 0;
   animation: dg-scatter 3s ease-in-out infinite;
-  will-change: transform, opacity;
 }
 /* Varied particle sizes */
 .dg-particle:nth-child(3n+1) { width: 2px; height: 2px; }

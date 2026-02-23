@@ -1,12 +1,14 @@
 import Nav from "@/components/Nav";
 import Hero from "@/components/Hero";
-import TrustBar from "@/components/TrustBar";
-import Expertise from "@/components/Expertise";
-import Philosophy from "@/components/Philosophy";
-import Process from "@/components/Process";
-import ProjectsCTA from "@/components/ProjectsCTA";
-import Connect from "@/components/Connect";
-import Footer from "@/components/Footer";
+import dynamic from "next/dynamic";
+
+const TrustBar = dynamic(() => import("@/components/TrustBar"));
+const Expertise = dynamic(() => import("@/components/Expertise"));
+const Philosophy = dynamic(() => import("@/components/Philosophy"));
+const Process = dynamic(() => import("@/components/Process"));
+const ProjectsCTA = dynamic(() => import("@/components/ProjectsCTA"));
+const Connect = dynamic(() => import("@/components/Connect"));
+const Footer = dynamic(() => import("@/components/Footer"));
 
 export default function Home() {
   return (

@@ -7,6 +7,7 @@ const spaceGrotesk = Space_Grotesk({
   variable: "--font-heading",
   subsets: ["latin"],
   weight: ["400", "500", "600", "700"],
+  display: "swap",
 });
 
 const dmSerif = DM_Serif_Display({
@@ -14,12 +15,14 @@ const dmSerif = DM_Serif_Display({
   subsets: ["latin"],
   weight: ["400"],
   style: ["normal", "italic"],
+  display: "swap",
 });
 
 const spaceMono = Space_Mono({
   variable: "--font-mono",
   subsets: ["latin"],
   weight: ["400", "700"],
+  display: "swap",
 });
 
 export const metadata: Metadata = {
@@ -68,23 +71,6 @@ export default function RootLayout({
       <body
         className={`${spaceGrotesk.variable} ${dmSerif.variable} ${spaceMono.variable}`}
       >
-        {/* Noise overlay */}
-        <svg
-          className="noise-overlay"
-          width="100%"
-          height="100%"
-          aria-hidden="true"
-        >
-          <filter id="noise">
-            <feTurbulence
-              type="fractalNoise"
-              baseFrequency="0.65"
-              numOctaves="3"
-              stitchTiles="stitch"
-            />
-          </filter>
-          <rect width="100%" height="100%" filter="url(#noise)" />
-        </svg>
         <ThemeProvider>{children}</ThemeProvider>
       </body>
     </html>

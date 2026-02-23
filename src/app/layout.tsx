@@ -34,11 +34,19 @@ export const metadata: Metadata = {
     "Node.js",
     "TypeScript",
   ],
+  metadataBase: new URL("https://ebin.pro"),
   openGraph: {
     title: "Ebin John Joseph — Full-Stack Engineer",
     description:
       "Full-stack engineer crafting production systems with modern technologies.",
     type: "website",
+    url: "https://ebin.pro",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Ebin John Joseph — Full-Stack Engineer",
+    description:
+      "Full-stack engineer crafting production systems with modern technologies.",
   },
 };
 

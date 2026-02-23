@@ -30,6 +30,10 @@ function applyTheme(t: Theme) {
   } else {
     document.documentElement.removeAttribute("data-theme");
   }
+  const favicon = document.getElementById("favicon") as HTMLLinkElement | null;
+  if (favicon) {
+    favicon.href = t === "dark" ? "/favicon-dark.svg" : "/favicon-light.svg";
+  }
 }
 
 export default function ThemeProvider({

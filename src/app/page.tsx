@@ -4,9 +4,9 @@ import dynamic from "next/dynamic";
 
 const TrustBar = dynamic(() => import("@/components/TrustBar"));
 const Expertise = dynamic(() => import("@/components/Expertise"));
-const Philosophy = dynamic(() => import("@/components/Philosophy"));
 const Process = dynamic(() => import("@/components/Process"));
 const ProjectsCTA = dynamic(() => import("@/components/ProjectsCTA"));
+const Blog = dynamic(() => import("@/components/Blog"));
 const Connect = dynamic(() => import("@/components/Connect"));
 const Footer = dynamic(() => import("@/components/Footer"));
 
@@ -18,9 +18,9 @@ export default function Home() {
         <Hero />
         <TrustBar />
         <Expertise />
-        <Philosophy />
         <Process />
         <ProjectsCTA />
+        <Blog />
         <Connect />
       </main>
       <Footer />

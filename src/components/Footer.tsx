@@ -11,16 +11,15 @@ export default function Footer() {
         <div className="footer-brand">
           <div className="fb-name">Ebin John Joseph</div>
           <div className="fb-tagline">
-            Full-stack engineer building production systems — scalable backends,
-            modern frontends, and everything between.
+            Full-stack engineer. TypeScript and Python, mostly.
           </div>
         </div>
         <div className="footer-col">
           <h4>Navigate</h4>
           <a href="#hero">Home</a>
           <a href="#features">Expertise</a>
-          <a href="#philosophy">Philosophy</a>
           <a href="#process">Process</a>
+          <a href="#writing">Writing</a>
         </div>
         <div className="footer-col">
           <h4>Connect</h4>
@@ -39,6 +38,9 @@ export default function Footer() {
             LinkedIn
           </a>
           <a href="mailto:ebin.john76@gmail.com">Email</a>
+          <a href="/feed.xml" target="_blank" rel="noopener noreferrer">
+            RSS
+          </a>
         </div>
         <div className="footer-col">
           <h4>Projects</h4>

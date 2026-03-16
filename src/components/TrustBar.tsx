@@ -5,13 +5,7 @@ import {
   Server,
   Database,
   Container,
-  Train,
   Triangle,
-  Brain,
-  Sparkles,
-  Box,
-  Wind,
-  Layers,
   Cloud,
   Zap,
   Code,
@@ -26,19 +20,16 @@ type TechItem = {
 const TECH: TechItem[] = [
   { name: "React", Icon: Atom },
   { name: "Next.js", Icon: Triangle },
+  { name: "TypeScript", Icon: Code },
   { name: "Python", Icon: Code },
   { name: "Node.js", Icon: Server },
+  { name: "Express", Icon: Server },
+  { name: "FastAPI", Icon: Zap },
   { name: "PostgreSQL", Icon: Database },
+  { name: "Redis", Icon: Database },
   { name: "Docker", Icon: Container },
-  { name: "Railway", Icon: Train },
+  { name: "Supabase", Icon: Cloud },
   { name: "Vercel", Icon: Triangle },
-  { name: "TensorFlow", Icon: Brain },
-  { name: "GSAP", Icon: Sparkles },
-  { name: "Three.js", Icon: Box },
-  { name: "Tailwind", Icon: Wind },
-  { name: "Redis", Icon: Zap },
-  { name: "AWS", Icon: Cloud },
-  { name: "Motion", Icon: Layers },
 ];
 
 export default function TrustBar() {
@@ -50,9 +41,9 @@ export default function TrustBar() {
         {/* Fixed label cell */}
         <div className="trust-bar-label-cell">
           <span className="trust-bar-label-text">
-            Built with <span className="trust-bar-label-accent">{TECH.length}+</span>
+            Current
             <br />
-            technologies
+            <span className="trust-bar-label-accent">Stack</span>
           </span>
         </div>
 

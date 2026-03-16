@@ -51,9 +51,8 @@ export default function Hero() {
             <span className="accent">System.</span>
           </div>
           <p className="hero-sub hero-reveal" style={{ animationDelay: "1s" }}>
-            Full-stack engineer crafting production systems — from multi-tenant
-            web apps and scalable backends to high-performance interfaces that
-            people actually use.
+            I build web applications and the infrastructure behind them.
+            TypeScript and Python, mostly.
           </p>
           <a href="#projects" className="hero-cta-btn hero-reveal" style={{ animationDelay: "1.2s" }}>
             Explore Projects &darr;

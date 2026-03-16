@@ -322,21 +322,21 @@ const steps = [
     num: "Step 01 — Architect",
     title: "Map the System",
     description:
-      "Before writing a line of code, I decompose the problem into bounded contexts, data flows, and failure modes. Architecture decisions are documented, not improvised.",
+      "Define services, draw boundaries, document decisions before writing code.",
     Visual: ArchitectVisual,
   },
   {
     num: "Step 02 — Implement",
     title: "Ship & Observe",
     description:
-      "Lean sprints, feature flags, and continuous deployment. Every release is instrumented — metrics, logs, and traces from day one. No black boxes.",
+      "Small releases, instrumented from day one. If it's not measured, it doesn't exist.",
     Visual: ImplementVisual,
   },
   {
     num: "Step 03 — Evolve",
     title: "Iterate with Data",
     description:
-      "Performance audits, user telemetry, and automated regression tests shape the next cycle. Systems get smarter with every deployment.",
+      "Performance profiles and test coverage drive the next deploy, not guesswork.",
     Visual: EvolveVisual,
   },
 ];
@@ -379,7 +379,7 @@ export default function Process() {
   return (
     <section className="process" id="process">
       <div className="process-header">
-        <SectionMarker current={4} total={7} category="Process" sublabel="How I Work" />
+        <SectionMarker current={3} total={7} category="Process" sublabel="How I Work" />
         <h2>How I Work</h2>
       </div>
       <div className="process-cards-wrapper" ref={wrapperRef}>

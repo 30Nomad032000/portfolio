@@ -64,7 +64,7 @@ function ShufflerCard() {
       <div className="feature-card-main">
         <div className="feature-card-header">
           <h3>Full-Stack Web Development</h3>
-          <p>End-to-end product engineering from database to deploy.</p>
+          <p>Database to deploy.</p>
         </div>
         <div className="feature-card-body">
           <div className="shuffler-stack">
@@ -123,7 +123,7 @@ function TypewriterCardNew() {
       <div className="feature-card-main">
         <div className="feature-card-header">
           <h3>AI &amp; Machine Learning</h3>
-          <p>Model training, inference pipelines, and intelligent automation.</p>
+          <p>Training, inference, and automation.</p>
         </div>
         <div className="feature-card-body">
           <div className="typewriter-container">
@@ -248,7 +248,7 @@ function DevOpsCard() {
       <div className="devops-text">
         <div className="feature-card-header">
           <h3>DevOps &amp; Cloud</h3>
-          <p>Docker, Kubernetes, AWS — containerized deploys at scale.</p>
+          <p>Containers, CI/CD, infrastructure.</p>
         </div>
       </div>
 

@@ -9,19 +9,30 @@ const projects = [
     name: "Gambit",
     subtitle: "AI Chess Betting Platform",
     description:
-      "Polyglot microservices — AI agents compete on a ranked ELO ladder with real-time streaming via WebSocket, dynamic odds engine with auto-settlement, and MCP server enabling external LLMs to join as players.",
-    stack: ["TypeScript", "Python", "React", "Express", "FastAPI", "PostgreSQL", "Redis", "WebSocket"],
+      "AI agents play ranked chess. Users bet on outcomes. WebSocket streaming, ELO ratings, MCP server for external LLMs.",
+    stack: ["TypeScript", "Python", "React", "Express", "FastAPI", "PostgreSQL", "Redis"],
     image: "/projects/gambit.png",
     liveUrl: "https://chess-arena-flax.vercel.app/",
     githubUrl: "https://github.com/30Nomad032000/chess-arena",
     status: "live" as const,
   },
   {
-    name: "Prakash Duo",
-    subtitle: "E-Commerce Platform",
+    name: "ResuMCP",
+    subtitle: "AI Resume Builder",
     description:
-      "Complete e-commerce system with Cashfree payment gateway, admin dashboard with inventory management, real-time Supabase subscriptions, and automated Zoho SMTP notifications.",
-    stack: ["Next.js", "TypeScript", "Supabase", "Cashfree", "Tailwind CSS"],
+      "AI-powered resume builder. No server, no data collection — everything stays in your browser.",
+    stack: ["TypeScript", "Next.js", "WebMCP"],
+    image: "/projects/resumcp.png",
+    liveUrl: "https://resumcp.vercel.app",
+    githubUrl: "https://github.com/30Nomad032000/resumcp",
+    status: "live" as const,
+  },
+  {
+    name: "Prakash Duo",
+    subtitle: "E-Commerce Store",
+    description:
+      "Live e-commerce store with Cashfree payments, admin dashboard, and inventory management.",
+    stack: ["Next.js", "TypeScript", "Supabase", "Cashfree"],
     image: "/projects/prakashduo.png",
     liveUrl: "https://www.banglesbyprakashduo.store/",
     status: "live" as const,
@@ -30,18 +41,40 @@ const projects = [
     name: "Trident Rentals",
     subtitle: "Property Rental Platform",
     description:
-      "Full-stack property rental application with listing management, advanced search and filtering, booking workflows, and role-based access.",
-    stack: ["Next.js", "TypeScript", "Supabase", "Tailwind CSS"],
+      "Property listings with search, booking, and role-based access.",
+    stack: ["Next.js", "TypeScript", "Supabase"],
     image: "/projects/tridentrent.png",
     liveUrl: "https://tridentrent.com",
     status: "live" as const,
   },
   {
-    name: "Logentic",
-    subtitle: "Multilingual Voice Assistant · Edge AI",
+    name: "ICEAMT",
+    subtitle: "Conference Website",
     description:
-      "Hyper-localized voice assistant supporting 21+ Indian languages. LangGraph multi-step agent workflows, OpenAI Whisper speech recognition, optimized for Raspberry Pi 5 edge inference.",
-    stack: ["Python", "FastAPI", "React", "LangGraph", "Whisper ASR", "RPi 5"],
+      "Official site for the ICEAMT 2027 international conference. Registration, schedule, and speaker profiles.",
+    stack: ["TypeScript", "Next.js", "React"],
+    image: "/projects/iceamt.png",
+    liveUrl: "https://iceamt.vercel.app",
+    githubUrl: "https://github.com/30Nomad032000/iceamt",
+    status: "live" as const,
+  },
+  {
+    name: "ASIET MCA",
+    subtitle: "Course Materials Explorer",
+    description:
+      "File explorer for MCA course materials — notes, assignments, question papers across 4 semesters. Folder tree sidebar, grid/list views.",
+    stack: ["TypeScript", "React", "Tailwind CSS", "Vite"],
+    image: "/projects/asiet-mca.png",
+    liveUrl: "https://asiet-mca.github.io/",
+    githubUrl: "https://github.com/asiet-mca/asiet-mca.github.io",
+    status: "live" as const,
+  },
+  {
+    name: "Logentic",
+    subtitle: "Multilingual Voice Assistant",
+    description:
+      "Voice assistant for 21+ Indian languages. Runs on Raspberry Pi 5.",
+    stack: ["Python", "FastAPI", "React", "LangGraph", "Whisper ASR"],
     image: "/projects/logentic.png",
     githubUrl: "https://github.com/30Nomad032000/logentic",
     status: "development" as const,
@@ -52,13 +85,12 @@ export default function ProjectsCTA() {
   return (
     <section className="projects-section" id="projects">
       <div className="projects-header-block">
-        <SectionMarker current={5} total={7} category="Work" sublabel="Projects" />
+        <SectionMarker current={4} total={7} category="Work" sublabel="Projects" />
         <h2>
           Explore the <span className="accent">Projects.</span>
         </h2>
         <p className="projects-intro">
-          From AI chess platforms and multi-tenant SaaS to edge computing —
-          built with React, Next.js, Django, Express, FastAPI, and PostgreSQL.
+          What I&apos;ve shipped.
         </p>
       </div>
 
@@ -103,7 +135,6 @@ export default function ProjectsCTA() {
                     width={1280}
                     height={800}
                     className="project-preview-img"
-                    unoptimized
                   />
                 </div>
               </a>
